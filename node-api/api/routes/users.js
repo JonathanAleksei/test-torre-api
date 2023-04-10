@@ -1,31 +1,17 @@
 const express = require('express');
 const router = express.Router();
-
-router.get('/', (req, res, next)=>{
-    res.status(200).json({
-        message: 'handiling get'
-    })
-})
-
-router.post('/', (req, res, next)=>{
-    res.status(200).json({
-        message: 'handiling post'
-    })
-})
-
-router.get('/:usersId',(req, res, next)=> {
-    const id = req.params.userId;
-    if(id=== 'special'){
-    res.status(200).json({
-        message: 'You discovered the special ID',
-        id: id
-    });
-    } else {
-    res.status(200).json({
-        message: 'you passed an id',
-    });
-    }
-});
+const axios = require('axios');
    
+router.get('/:username',(req,res,next) => {
+    const username = req.params.username
+    axios
+        .get(`https://torre.bio/api/bios/${username}`)
+        .then((response) => {
+            res.status(200).json(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+})
 
 module.exports = router;
