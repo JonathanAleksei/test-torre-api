@@ -8,19 +8,36 @@
 </template>
 
 <script>
+import axios from "axios";
 import CustomInput from './components/CustomInput.vue';
 
 export default {
   components: { CustomInput },
    data(){
     return {
-      username : 'getuser'
+      user: {
+        name: '',
+        skills: []
+      },
+      username : 'getuser' 
     }
    },
 
-  methods: {
+//Get user Axios
+   methods: {
     fetchUser () {
-      console.log("Skills")
+      console.log(this.username)
+      axios
+        .get(`https://torre.bio/api/bios/torrenegra`)
+        .then((response) => {
+          console.log(response.data)
+          this.user.name = response.data.person.name
+          this.user.skills = response.data.strengths
+          console.log(this.user.name)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    <input v-bind="$attrs" v-model="internalValue" @input="updateValue" placeholder="Search user"/>
+    <input v-bind="$attrs" v-model="internalValue" @input="updateValue" placeholder="Search using UserName e.g. torrenegra01"/>
   </template>
   
   <script>
